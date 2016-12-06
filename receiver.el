@@ -85,4 +85,4 @@
 
 (provide 'receiver)
 
-;;; receiver-mode.el ends here
+;;; receiver.el ends here
