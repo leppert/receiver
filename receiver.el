@@ -21,13 +21,18 @@
   :group 'receiver
   :type 'integer)
 
-(defcustom receiver-request-buffer-name "*HTTP Request*"
-  "Name for request buffer."
+(defcustom receiver-tunnel-command "beame-insta-ssl tunnel %p http"
+  "The command to use to start the tunnel, where %p is replaced by the port."
   :group 'receiver
   :type 'string)
 
 (defcustom receiver-tunnel-buffer-name "receiver"
   "Name for tunnel process buffer."
+  :group 'receiver
+  :type 'string)
+
+(defcustom receiver-request-buffer-name "*HTTP Request*"
+  "Name for request buffer."
   :group 'receiver
   :type 'string)
 
@@ -62,12 +67,9 @@
 
 (defun receiver--start-tunnel ()
   "Start the tunnel connection."
-  (start-process receiver-tunnel-buffer-name
-                 receiver-tunnel-buffer-name
-                 "beame-insta-ssl"
-                 "tunnel"
-                 (int-to-string receiver-port)
-                 "http"))
+  (start-process-shell-command receiver-tunnel-buffer-name
+                               receiver-tunnel-buffer-name
+                               (format-spec receiver-tunnel-command (format-spec-make ?p receiver-port))))
 
 (defun receiver--kill-tunnel ()
   "Kill the tunnel connection."
