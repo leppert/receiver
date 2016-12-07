@@ -26,6 +26,11 @@
   :group 'receiver
   :type 'string)
 
+(defcustom receiver-tunnel-buffer-name "receiver"
+  "Name for tunnel process buffer."
+  :group 'receiver
+  :type 'string)
+
 (defcustom receiver-response-code 200
   "The HTTP code to send in response."
   :group 'receiver
@@ -57,8 +62,8 @@
 
 (defun receiver--start-tunnel ()
   "Start the tunnel connection."
-  (start-process "receiver"
-                 "receiver"
+  (start-process receiver-tunnel-buffer-name
+                 receiver-tunnel-buffer-name
                  "beame-insta-ssl"
                  "tunnel"
                  (int-to-string receiver-port)
@@ -66,8 +71,8 @@
 
 (defun receiver--kill-tunnel ()
   "Kill the tunnel connection."
-  (ignore-errors (kill-process "receiver"))
-  (kill-buffer "receiver"))
+  (ignore-errors (kill-process receiver-tunnel-buffer-name))
+  (kill-buffer receiver-tunnel-buffer-name))
 
 (defun receiver-listen ()
   "Start listening."
