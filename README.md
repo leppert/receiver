@@ -9,6 +9,9 @@ It’s handy for testing webhooks and currently assumes POST requests
 sending JSON data, but could easily be expanded with additional format
 support (PRs welcomed).
 
+For an example use-case, check out this
+[Stack Overflow question](http://stackoverflow.com/questions/40074403/parsing-webhook-using-emacs-web-server).
+
 ## Installation
 
 - Follow
