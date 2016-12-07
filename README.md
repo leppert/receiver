@@ -14,11 +14,30 @@ For an example use-case, check out this
 
 ## Installation
 
-- Follow
-  the [beame-insta-ssl](https://github.com/beameio/beame-insta-ssl)
-  installation and account creation instructions
 - Install [elnode](https://github.com/nicferrier/elnode)
 - Install this script
+
+## Configuration
+
+Install your preferred tunnel and set `receiver-tunnel-command` to
+properly execute it, where `%p` will be replaced with the port
+defined in `receiver-port`. For example, the default command is:
+
+``` elisp
+"beame-insta-ssl tunnel %p http"
+```
+
+To use [beame-insta-ssl](https://github.com/beameio/beame-insta-ssl), follow their installation
+instructions [here](https://github.com/beameio/beame-insta-ssl#get-started-in-three-quick-steps). If
+instead you’d like to
+use [localtunnel.me](https://localtunnel.github.io/www/), your
+`receiver-tunnel-command` might look something like this:
+
+``` elisp
+"localtunnel --port %p"
+```
+
+[Ngrok](https://ngrok.com) may also work.
 
 ## Usage
 
