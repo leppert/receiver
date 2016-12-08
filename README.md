@@ -23,7 +23,7 @@ Install your preferred tunnel and set `receiver-tunnel-command` to
 properly execute it, where `%p` will be replaced with the port
 defined in `receiver-port`. For example, the default command is:
 
-``` elisp
+``` emacs-lisp
 "beame-insta-ssl tunnel %p http"
 ```
 
@@ -33,8 +33,8 @@ instead you’d like to
 use [localtunnel.me](https://localtunnel.github.io/www/), your
 `receiver-tunnel-command` might look something like this:
 
-``` elisp
-"localtunnel --port %p"
+``` emacs-lisp
+"lt --port %p"
 ```
 
 [Ngrok](https://ngrok.com) may also work.
@@ -45,3 +45,14 @@ use [localtunnel.me](https://localtunnel.github.io/www/), your
 - Results are printed to a buffer named `*HTTP Request*`
 - Tunnel status is printed to a buffer named `receiver`
 - `receiver-hangup` closes the tunnel and web server
+
+## Notifications
+
+Receiver provides a `receiver-request-received-hook` hook, allowing
+you to receive notifications when requests arrive. An example using
+[alert.el](https://github.com/jwiegley/alert) might look something like this:
+
+``` emacs-lisp
+(add-hook 'receiver-request-received-hook
+          (lambda () (alert "A new request has arrived!")))
+```

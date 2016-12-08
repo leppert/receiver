@@ -51,6 +51,9 @@
   :group 'receiver
   :type 'string)
 
+(defvar receiver-request-received-hook nil
+  "Hook run after request buffer created and data loaded.")
+
 (defun receiver--handler (httpcon)
   "The elnode response handler.  HTTPCON: the elnode request map."
   (let* ((params (elnode-http-params httpcon))
@@ -61,7 +64,8 @@
         (erase-buffer)
         (princ json (current-buffer))
         (ignore-errors (json-pretty-print-buffer))
-        (js-mode))))
+        (js-mode)
+        (run-hooks 'receiver-request-received-hook))))
   (elnode-http-start httpcon receiver-response-code '("Content-type" . receiver-response-content-type))
   (elnode-http-return httpcon receiver-response-body))
 
